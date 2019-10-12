@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ExchangeRate /> should onChangeInput be called 1`] = `
+<FormRow>
+  <Col
+    xs={3}
+  >
+    <FormGroup>
+      <FormControl
+        as="select"
+      >
+        <option
+          key="AZN"
+          value="AZN"
+        >
+          AZN
+        </option>
+        <option
+          key="USD"
+          value="USD"
+        >
+          USD
+        </option>
+        <option
+          key="EUR"
+          value="EUR"
+        >
+          EUR
+        </option>
+      </FormControl>
+    </FormGroup>
+  </Col>
+  <Col
+    xs={9}
+  >
+    <InputGroup>
+      <FormControl
+        aria-label="From"
+        placeholder="From"
+        value={15}
+      />
+    </InputGroup>
+  </Col>
+</FormRow>
+`;
+
+exports[`<ExchangeRate /> snapshot should match 1`] = `
+<FormRow>
+  <Col
+    xs={3}
+  >
+    <FormGroup>
+      <FormControl
+        as="select"
+        onChange={[MockFunction]}
+      >
+        <option
+          key="AZN"
+          value="AZN"
+        >
+          AZN
+        </option>
+        <option
+          key="USD"
+          value="USD"
+        >
+          USD
+        </option>
+        <option
+          key="EUR"
+          value="EUR"
+        >
+          EUR
+        </option>
+      </FormControl>
+    </FormGroup>
+  </Col>
+  <Col
+    xs={9}
+  >
+    <InputGroup>
+      <FormControl
+        aria-label="From"
+        onChange={[MockFunction]}
+        placeholder="From"
+        value={15}
+      />
+    </InputGroup>
+  </Col>
+</FormRow>
+`;

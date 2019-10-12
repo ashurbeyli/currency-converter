@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ExchangeRate /> snapshot should match 1`] = `
+<span>
+  <strong>
+    Exchange Rate
+  </strong>
+   1
+  EUR
+   = 0.78
+</span>
+`;

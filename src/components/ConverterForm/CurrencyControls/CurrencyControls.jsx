@@ -11,7 +11,7 @@ const CurrencyControls = ({
   return (
     <Form.Row>
       <Col xs={3}>
-        <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Group>
           <Form.Control as="select" onChange={onChangeSelect}>
             {options &&
               options.map(currency => {
@@ -25,11 +25,10 @@ const CurrencyControls = ({
         </Form.Group>
       </Col>
       <Col xs={9}>
-        <InputGroup className="mb-3">
+        <InputGroup>
           <FormControl
             placeholder={label}
             aria-label={label}
-            aria-describedby="basic-addon1"
             onChange={onChangeInput}
             value={inputValue}
           />
