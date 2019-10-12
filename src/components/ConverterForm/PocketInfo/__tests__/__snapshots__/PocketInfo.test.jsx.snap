@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PocketInfo /> snapshot should match 1`] = `
+<PocketInfo
+  currency="USD"
+  value={1}
+>
+  <span>
+    You have 
+    1
+    USD
+  </span>
+</PocketInfo>
+`;
