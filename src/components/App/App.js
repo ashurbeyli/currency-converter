@@ -1,12 +1,17 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
-import Converter from '../Converter/Converter';
+import {Col, Container, Row} from 'react-bootstrap';
+import ConverterForm from '../ConverterForm/ConverterForm';
 import './App.css';
 
 function App() {
   return (
     <Container className="App">
-      <Converter />
+        <Row>
+            <Col className="title">
+                <h2>Exchange money</h2>
+            </Col>
+        </Row>
+        <ConverterForm />
     </Container>
   );
 }
