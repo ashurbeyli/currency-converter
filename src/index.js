@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
+import setupMockAdapter from './mock/setupMockAdapter';
+
+if ('isDevelopment') setupMockAdapter();
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

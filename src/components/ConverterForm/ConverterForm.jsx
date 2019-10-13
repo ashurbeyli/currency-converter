@@ -10,13 +10,12 @@ import {
   omitSelectedFromPockets
 } from '../../utils/pocketsUtils';
 
-import mockPockets from '../../mockData/pockets';
-import mockRates from '../../mockData/rates';
-import mockBalance from '../../mockData/balance';
+import mockPockets from '../../mock/data/pockets';
+import mockBalance from '../../mock/data/balance';
 
-const ConverterForm = () => {
+const ConverterForm = ({ rates: ratesData }) => {
   const [pockets] = useState(mockPockets);
-  const [rates] = useState(mockRates);
+  const [rates] = useState(ratesData);
   const [balance, setBalance] = useState(mockBalance);
   const [currencyFrom, setCurrencyFrom] = useState(pockets[0]);
   const [currencyTo, setCurrencyTo] = useState(pockets[1]);
