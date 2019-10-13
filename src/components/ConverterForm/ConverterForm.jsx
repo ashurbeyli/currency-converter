@@ -1,111 +1,107 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import './ConverterForm.css';
 import CurrencyControls from './CurrencyControls/CurrencyControls';
 import PocketInfo from './PocketInfo/PocketInfo';
 import ExchangeRate from './ExchangeRate/ExchangeRate';
+import {
+  convertAmount,
+  getFirstFromOmittedPockets,
+  omitSelectedFromPockets
+} from '../../utils/pocketsUtils';
 
-class ConverterForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pockets: {
-        EUR: {
-          balance: 120
-        },
-        GBP: {
-          balance: 50
-        },
-        USD: {
-          balance: 200
-        }
-      },
-      rates: {
-        USD: 1.103,
-        EUR: 1.0,
-        GBP: 0.90155
-      },
-      from: 'EUR',
-      to: 'GBP',
-      fromNumber: 0,
-      toNumber: 0
-    };
-  }
+import mockPockets from '../../mockData/pockets';
+import mockRates from '../../mockData/rates';
+import mockBalance from '../../mockData/balance';
 
-  updateFrom = evt => {
-    this.setState({
-      from: evt.target.value
+const ConverterForm = () => {
+  const [pockets] = useState(mockPockets);
+  const [rates] = useState(mockRates);
+  const [balance, setBalance] = useState(mockBalance);
+  const [currencyFrom, setCurrencyFrom] = useState(pockets[0]);
+  const [currencyTo, setCurrencyTo] = useState(pockets[1]);
+  const [fromNumber, setFromNumber] = useState();
+  const [toNumber, setToNumber] = useState();
+
+  const onChangeCurrencyFromSelect = evt => {
+    const { value } = evt.target;
+    setCurrencyFrom(value);
+    setCurrencyTo(getFirstFromOmittedPockets(pockets, value));
+  };
+
+  const onCurrencyFromInputChange = evt => {
+    const { value } = evt.target;
+    const converted = convertAmount(value, currencyFrom, currencyTo, rates);
+    setFromNumber(value);
+    setToNumber(converted || '');
+  };
+  const onCurrencyToInputChange = evt => {
+    const { value } = evt.target;
+    const converted = convertAmount(value, currencyTo, currencyFrom, rates);
+    setToNumber(value);
+    setFromNumber(converted || '');
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    }
+
+    setBalance({
+      ...balance,
+      [currencyFrom]: balance[currencyFrom] - Number(fromNumber || 0),
+      [currencyTo]: balance[currencyTo] + Number(toNumber || 0)
     });
   };
 
-  updateTo = evt => {
-    this.setState({
-      to: evt.target.value
-    });
-  };
-
-  updateFromNumber = evt => {
-    this.setState({
-      fromNumber: evt.target.value,
-      toNumber: 15
-    });
-  };
-
-  updateToNumber = evt => {
-    this.setState({
-      fromNumber: 10,
-      toNumber: evt.target.value
-    });
-  };
-
-  render() {
-    const { pockets, from, to, fromNumber, toNumber } = this.state;
-    return (
-      <Form>
-        <Form.Row>
-          <Col xs={5}>
-            <CurrencyControls
-              label="from"
-              options={Object.keys(pockets)}
-              onChangeSelect={this.updateFrom}
-              onChangeInput={this.updateFromNumber}
-              inputValue={fromNumber}
-            />
-          </Col>
-          <Col xs={2} className="text-center">
-            {'=>'}
-          </Col>
-          <Col xs={5}>
-            <CurrencyControls
-              label="to"
-              options={Object.keys(pockets).filter(el => el !== from)}
-              onChangeSelect={this.updateTo}
-              onChangeInput={this.updateToNumber}
-              inputValue={toNumber}
-            />
-          </Col>
-        </Form.Row>
-        <Form.Row>
-          <Col xs={3}>
-            <PocketInfo currency={from} value={pockets[from].balance} />
-          </Col>
-          <Col xs={6} className="text-center">
-            <ExchangeRate from={from} to={to} />
-          </Col>
-          <Col xs={3} className="text-right">
-            <PocketInfo currency={to} value={pockets[to].balance} />
-          </Col>
-        </Form.Row>
-        <Form.Row>
-          <Col className="text-right exchangeSubmitArea">
-            <Button variant="primary" size="lg" block>
-              Exchange
-            </Button>
-          </Col>
-        </Form.Row>
-      </Form>
-    );
-  }
-}
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Form.Row>
+        <Col xs={5}>
+          <CurrencyControls
+            label="from"
+            options={pockets}
+            onChangeSelect={onChangeCurrencyFromSelect}
+            onChangeInput={onCurrencyFromInputChange}
+            inputValue={fromNumber}
+          />
+        </Col>
+        <Col xs={2} className="text-center">
+          {'=>'}
+        </Col>
+        <Col xs={5}>
+          <CurrencyControls
+            label="to"
+            selected={currencyTo}
+            options={omitSelectedFromPockets(pockets, currencyFrom)}
+            onChangeSelect={evt => setCurrencyTo(evt.target.value)}
+            onChangeInput={onCurrencyToInputChange}
+            inputValue={toNumber}
+          />
+        </Col>
+      </Form.Row>
+      <Form.Row>
+        <Col xs={3}>
+          <PocketInfo currency={currencyFrom} value={balance[currencyFrom]} />
+        </Col>
+        <Col xs={6} className="text-center">
+          <ExchangeRate from={currencyFrom} to={currencyTo} rates={rates} />
+        </Col>
+        <Col xs={3} className="text-right">
+          <PocketInfo currency={currencyTo} value={balance[currencyTo]} />
+        </Col>
+      </Form.Row>
+      <Form.Row>
+        <Col className="text-right exchangeSubmitArea">
+          <Button type="submit" variant="primary" size="lg" block>
+            Exchange
+          </Button>
+        </Col>
+      </Form.Row>
+    </Form>
+  );
+};
 
 export default ConverterForm;

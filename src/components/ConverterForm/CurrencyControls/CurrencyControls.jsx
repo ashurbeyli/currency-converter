@@ -4,6 +4,7 @@ import { Col, Form, FormControl, InputGroup } from 'react-bootstrap';
 const CurrencyControls = ({
   label,
   options,
+  selected,
   inputValue,
   onChangeSelect,
   onChangeInput
@@ -12,7 +13,7 @@ const CurrencyControls = ({
     <Form.Row>
       <Col xs={3}>
         <Form.Group>
-          <Form.Control as="select" onChange={onChangeSelect}>
+          <Form.Control as="select" onChange={onChangeSelect} value={selected}>
             {options &&
               options.map(currency => {
                 return (
