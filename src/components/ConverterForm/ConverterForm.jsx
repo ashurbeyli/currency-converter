@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import './ConverterForm.css';
 import CurrencyControls from './CurrencyControls/CurrencyControls';
@@ -10,18 +10,25 @@ import {
   omitSelectedFromPockets
 } from '../../utils/pocketsUtils';
 
-import mockPockets from '../../mockData/pockets';
-import mockRates from '../../mockData/rates';
-import mockBalance from '../../mockData/balance';
+import mockPockets from '../../mock/data/pockets';
+import mockBalance from '../../mock/data/balance';
 
-const ConverterForm = () => {
+const ConverterForm = ({ rates }) => {
   const [pockets] = useState(mockPockets);
-  const [rates] = useState(mockRates);
   const [balance, setBalance] = useState(mockBalance);
   const [currencyFrom, setCurrencyFrom] = useState(pockets[0]);
   const [currencyTo, setCurrencyTo] = useState(pockets[1]);
   const [fromNumber, setFromNumber] = useState();
   const [toNumber, setToNumber] = useState();
+  const [lastUpdatedInput, setLastUpdatedInput] = useState();
+
+  useEffect(() => {
+    if(lastUpdatedInput === 'to') {
+      setFromNumber(convertAmount(toNumber, currencyTo, currencyFrom, rates));
+    } else {
+      setToNumber(convertAmount(fromNumber, currencyFrom, currencyTo, rates));
+    }
+  }, [lastUpdatedInput, toNumber, setToNumber, fromNumber, currencyFrom, currencyTo, rates]);
 
   const onChangeCurrencyFromSelect = evt => {
     const { value } = evt.target;
@@ -34,13 +41,17 @@ const ConverterForm = () => {
     const converted = convertAmount(value, currencyFrom, currencyTo, rates);
     setFromNumber(value);
     setToNumber(converted || '');
+    setLastUpdatedInput('from');
   };
   const onCurrencyToInputChange = evt => {
     const { value } = evt.target;
     const converted = convertAmount(value, currencyTo, currencyFrom, rates);
     setToNumber(value);
     setFromNumber(converted || '');
+    setLastUpdatedInput('to');
   };
+
+  const checkBalanceIsValid = () => balance[currencyFrom] - Number(fromNumber || 0) >= 0;
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -95,7 +106,7 @@ const ConverterForm = () => {
       </Form.Row>
       <Form.Row>
         <Col className="text-right exchangeSubmitArea">
-          <Button type="submit" variant="primary" size="lg" block>
+          <Button type="submit" variant="primary" size="lg" block disabled={!checkBalanceIsValid()}>
             Exchange
           </Button>
         </Col>
