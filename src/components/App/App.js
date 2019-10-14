@@ -12,7 +12,7 @@ function App() {
           <h2>Exchange money</h2>
         </Col>
       </Row>
-      {withRatesLoader(ConverterForm)}
+      {withRatesLoader(ConverterForm)()}
     </Container>
   );
 }

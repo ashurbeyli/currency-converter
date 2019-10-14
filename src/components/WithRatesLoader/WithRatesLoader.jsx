@@ -1,35 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import getRates from '../../utils/api/getRates';
+import React, { useState, useEffect } from 'react';
+import useInterval from '@use-it/interval';
+import fetchRates from '../../utils/api/fetchRates';
+import { FETCH_RATES_DELAY } from '../../utils/constants/apiConstants';
 
-const WithRatesLoader = WrapperComponent => {
-  const [error, setError] = useState();
+
+const withRatesLoader = WrapperComponent => () => {
   const [rates, setRates] = useState();
+  const [error, setError] = useState();
 
-  let gettingRates;
   const intervalFunc = () => {
-    if (gettingRates) {
-      gettingRates.abort();
-    }
-    gettingRates = getRates()
-      .then(response => {
-        gettingRates = undefined;
-        return response.data
-          ? setRates(response.data)
-          : setError('Error loading rates');
+    fetchRates()
+      .then(res => {
+        setRates(res.data);
       })
       .catch(err => {
-        gettingRates = undefined;
         setError(err);
       });
-    return true;
   };
 
   useEffect(() => {
-    // intervalFunc();
-    setInterval(intervalFunc, 10 * 1000);
-  });
+    intervalFunc();
+  }, []);
+
+  useInterval(intervalFunc, FETCH_RATES_DELAY);
 
   return rates && !error ? <WrapperComponent rates={rates} /> : error;
 };
 
-export default WithRatesLoader;
+export default withRatesLoader;

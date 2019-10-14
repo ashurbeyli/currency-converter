@@ -5,7 +5,11 @@ import mockRates from './data/rates';
 
 export default () => {
   const mock = new MockAdapter(axios);
-  mock.onGet(API_URL).reply(200, mockRates);
+
+  mockRates.forEach((rates) => {
+    mock.onGet(API_URL).replyOnce(200, rates);
+  });
+  mock.onGet(API_URL).reply(200, mockRates[0]);
 
   return mock;
 };
