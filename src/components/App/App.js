@@ -1,8 +1,8 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import ConverterForm from '../ConverterForm/ConverterForm';
-import './App.css';
 import withRatesLoader from '../withRatesLoader/withRatesLoader';
+import './App.css';
 
 function App() {
   return (
