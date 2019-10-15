@@ -2,12 +2,34 @@
 
 exports[`<PocketInfo /> snapshot should match 1`] = `
 <PocketInfo
+  balance={100}
   currency="USD"
-  value={1}
 >
-  <span>
+  <span
+    style={Object {}}
+  >
     You have 
-    1
+    100
+    USD
+  </span>
+</PocketInfo>
+`;
+
+exports[`<PocketInfo /> snapshot should match when balance is less than value 1`] = `
+<PocketInfo
+  balance={100}
+  currency="USD"
+  value={150}
+>
+  <span
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    You have 
+    100
     USD
   </span>
 </PocketInfo>

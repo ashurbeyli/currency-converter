@@ -7,7 +7,8 @@ const CurrencyControls = ({
   selected,
   inputValue,
   onChangeSelect,
-  onChangeInput
+  onChangeInput,
+  inputFormatter
 }) => {
   return (
     <Form.Row>
@@ -30,7 +31,7 @@ const CurrencyControls = ({
           <FormControl
             placeholder={label}
             aria-label={label}
-            onChange={onChangeInput}
+            onChange={inputFormatter(onChangeInput)}
             value={inputValue}
           />
         </InputGroup>

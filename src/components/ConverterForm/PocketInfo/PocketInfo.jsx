@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PocketInfo = ({ value, currency }) => (
-  <span>
-    You have {value}
+const PocketInfo = ({ balance, value, currency }) => (
+  <span style={{ ...(value && balance < value ? { color: 'red' } : {}) }}>
+    You have {balance}
     {currency}
   </span>
 );
