@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConverterForm/> snapshot should match 1`] = `
+<Form
+  inline={false}
+  onSubmit={[Function]}
+>
+  <FormRow>
+    <Col
+      xs={5}
+    >
+      <CurrencyControls
+        inputFormatter={[Function]}
+        inputValue=""
+        label="from"
+        onChangeInput={[Function]}
+        onChangeSelect={[Function]}
+        options={
+          Array [
+            "USD",
+            "EUR",
+            "GBP",
+          ]
+        }
+      />
+    </Col>
+    <Col
+      xs={
+        Object {
+          "offset": 2,
+          "span": 5,
+        }
+      }
+    >
+      <CurrencyControls
+        inputFormatter={[Function]}
+        inputValue=""
+        label="to"
+        onChangeInput={[Function]}
+        onChangeSelect={[Function]}
+        options={
+          Array [
+            "EUR",
+            "GBP",
+          ]
+        }
+        selected="EUR"
+      />
+    </Col>
+  </FormRow>
+  <FormRow>
+    <Col
+      xs={3}
+    >
+      <PocketInfo
+        balance={100}
+        currency="USD"
+        value=""
+      />
+    </Col>
+    <Col
+      className="text-center"
+      xs={6}
+    >
+      <ExchangeRate
+        from="USD"
+        rates={
+          Array [
+            "USD",
+            "AZN",
+            "EUR",
+          ]
+        }
+        to="EUR"
+      />
+    </Col>
+    <Col
+      className="text-right"
+      xs={3}
+    >
+      <PocketInfo
+        balance={231}
+        currency="EUR"
+      />
+    </Col>
+  </FormRow>
+  <FormRow>
+    <Col
+      className="text-right exchangeSubmitArea"
+    >
+      <Button
+        active={false}
+        block={true}
+        disabled={false}
+        size="lg"
+        type="submit"
+        variant="primary"
+      >
+        Exchange
+      </Button>
+    </Col>
+  </FormRow>
+</Form>
+`;

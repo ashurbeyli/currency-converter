@@ -91,10 +91,7 @@ const ConverterForm = ({ rates }) => {
             inputValue={fromNumber || ''}
           />
         </Col>
-        <Col xs={2} className="text-center">
-          {'=>'}
-        </Col>
-        <Col xs={5}>
+        <Col xs={{ span: 5, offset: 2 }}>
           <CurrencyControls
             label="to"
             selected={currencyTo}
