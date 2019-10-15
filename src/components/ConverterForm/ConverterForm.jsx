@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import _ from 'lodash';
 import './ConverterForm.css';
@@ -11,13 +11,13 @@ import {
   omitSelectedFromPockets
 } from '../../utils/pocketsUtils';
 
-import mockPockets from '../../mock/data/pockets';
+import pockets from '../../mock/data/pockets';
 import mockBalance from '../../mock/data/balance';
 import twoDecimalsFormatter from '../../utils/formatters/twoDecimalsFormatter';
+import { balanceReducer } from './reducers';
 
 const ConverterForm = ({ rates }) => {
-  const [pockets] = useState(mockPockets);
-  const [balance, setBalance] = useState(mockBalance);
+  const [balance, balanceDispatcher] = useReducer(balanceReducer, mockBalance);
   const [currencyFrom, setCurrencyFrom] = useState(pockets[0]);
   const [currencyTo, setCurrencyTo] = useState(pockets[1]);
   const [fromNumber, setFromNumber] = useState('');
@@ -71,10 +71,16 @@ const ConverterForm = ({ rates }) => {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     }
-    setBalance({
-      ...balance,
-      [currencyFrom]: balanceFrom && balanceFrom - Number(fromNumber || 0),
-      [currencyTo]: balanceTo && balanceTo + Number(toNumber || 0)
+
+    balanceDispatcher({
+      type: 'DECREASE',
+      by: Number(fromNumber || 0),
+      currency: currencyFrom
+    });
+    balanceDispatcher({
+      type: 'INCREASE',
+      by: Number(toNumber || 0),
+      currency: currencyTo
     });
   };
 
