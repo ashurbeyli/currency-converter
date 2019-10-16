@@ -38,4 +38,6 @@ const withRatesLoader = WrappedComponent => () => {
   );
 };
 
+withRatesLoader.DisplayName = 'withRatesLoader';
+
 export default withRatesLoader;
