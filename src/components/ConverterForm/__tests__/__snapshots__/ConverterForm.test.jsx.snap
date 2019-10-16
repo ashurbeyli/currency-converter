@@ -10,7 +10,6 @@ exports[`<ConverterForm/> snapshot should match 1`] = `
       xs={5}
     >
       <CurrencyControls
-        inputFormatter={[Function]}
         inputValue=""
         label="from"
         onChangeInput={[Function]}
@@ -33,7 +32,6 @@ exports[`<ConverterForm/> snapshot should match 1`] = `
       }
     >
       <CurrencyControls
-        inputFormatter={[Function]}
         inputValue=""
         label="to"
         onChangeInput={[Function]}

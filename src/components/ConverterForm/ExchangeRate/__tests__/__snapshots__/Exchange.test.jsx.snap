@@ -7,6 +7,6 @@ exports[`<ExchangeRate /> snapshot should match 1`] = `
   </strong>
    1
   EUR
-   = 0.78
+   = 
 </span>
 `;
