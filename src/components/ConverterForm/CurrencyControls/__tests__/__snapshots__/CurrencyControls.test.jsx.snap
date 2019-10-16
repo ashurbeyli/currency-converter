@@ -8,26 +8,7 @@ exports[`<ExchangeRate /> should onChangeInput be called 1`] = `
     <FormGroup>
       <FormControl
         as="select"
-      >
-        <option
-          key="AZN"
-          value="AZN"
-        >
-          AZN
-        </option>
-        <option
-          key="USD"
-          value="USD"
-        >
-          USD
-        </option>
-        <option
-          key="EUR"
-          value="EUR"
-        >
-          EUR
-        </option>
-      </FormControl>
+      />
     </FormGroup>
   </Col>
   <Col
@@ -36,8 +17,22 @@ exports[`<ExchangeRate /> should onChangeInput be called 1`] = `
     <InputGroup>
       <FormControl
         aria-label="From"
+        onChange={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                1,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
         placeholder="From"
-        value={15}
       />
     </InputGroup>
   </Col>

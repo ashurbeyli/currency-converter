@@ -50,6 +50,7 @@ describe('<ExchangeRate />', () => {
       .props()
       .onChange(1);
 
+    expect(wrapper).toMatchSnapshot();
     expect(onChangeInput).toHaveBeenCalledWith(1);
   });
 });

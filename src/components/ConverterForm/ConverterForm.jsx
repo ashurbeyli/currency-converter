@@ -48,14 +48,16 @@ const ConverterForm = ({ rates }) => {
     setCurrencyTo(getFirstFromOmittedPockets(pockets, value));
   };
 
-  const onCurrencyFromInputChange = value => {
+  const onCurrencyFromInputChange = evt => {
+    const value = twoDecimalsFormatter(evt.target.value);
     const converted = convertAmount(value, currencyFrom, currencyTo, rates);
     setFromNumber(value);
     setToNumber(converted || '');
     setLastUpdatedInput('from');
   };
 
-  const onCurrencyToInputChange = value => {
+  const onCurrencyToInputChange = evt => {
+    const value = twoDecimalsFormatter(evt.target.value);
     const converted = convertAmount(value, currencyTo, currencyFrom, rates);
     setToNumber(value);
     setFromNumber(converted || '');
@@ -93,7 +95,6 @@ const ConverterForm = ({ rates }) => {
             options={pockets}
             onChangeSelect={onChangeCurrencyFromSelect}
             onChangeInput={onCurrencyFromInputChange}
-            inputFormatter={twoDecimalsFormatter}
             inputValue={fromNumber || ''}
           />
         </Col>
@@ -104,7 +105,6 @@ const ConverterForm = ({ rates }) => {
             options={omitSelectedFromPockets(pockets, currencyFrom)}
             onChangeSelect={evt => setCurrencyTo(evt.target.value)}
             onChangeInput={onCurrencyToInputChange}
-            inputFormatter={twoDecimalsFormatter}
             inputValue={toNumber || ''}
           />
         </Col>
