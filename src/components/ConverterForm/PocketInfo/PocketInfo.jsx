@@ -12,7 +12,7 @@ const defaultProps = {
 };
 
 const PocketInfo = ({ balance, value, currency }) => (
-  <span className={value && balance < Number(value || 0) ? '.text-danger' : {}}>
+  <span className={value && balance < Number(value || 0) ? 'text-danger' : {}}>
     You have {balance}
     {currency}
   </span>

@@ -23,7 +23,7 @@ exports[`<PocketInfo /> snapshot should match when balance is less than value 1`
   value={150}
 >
   <span
-    className=".text-danger"
+    className="text-danger"
   >
     You have 
     100
