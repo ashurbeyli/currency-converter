@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Button, Col } from 'react-bootstrap';
 import _ from 'lodash';
 import './ConverterForm.css';
@@ -14,7 +15,11 @@ import {
 import pockets from '../../mock/data/pockets';
 import mockBalance from '../../mock/data/balance';
 import twoDecimalsFormatter from '../../utils/formatters/twoDecimalsFormatter';
-import { balanceReducer } from './reducers';
+import { balanceReducer } from './reducersConverterForm';
+
+const propTypes = {
+  rates: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 const ConverterForm = ({ rates }) => {
   const [balance, balanceDispatcher] = useReducer(balanceReducer, mockBalance);
@@ -140,5 +145,8 @@ const ConverterForm = ({ rates }) => {
     </Form>
   );
 };
+
+ConverterForm.propTypes = propTypes;
+ConverterForm.DisplayName = 'ConverterForm';
 
 export default ConverterForm;
