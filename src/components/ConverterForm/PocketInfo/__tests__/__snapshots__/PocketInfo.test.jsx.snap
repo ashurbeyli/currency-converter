@@ -4,9 +4,10 @@ exports[`<PocketInfo /> snapshot should match 1`] = `
 <PocketInfo
   balance={100}
   currency="USD"
+  value=""
 >
   <span
-    style={Object {}}
+    className={Object {}}
   >
     You have 
     100
@@ -22,11 +23,7 @@ exports[`<PocketInfo /> snapshot should match when balance is less than value 1`
   value={150}
 >
   <span
-    style={
-      Object {
-        "color": "red",
-      }
-    }
+    className=".text-danger"
   >
     You have 
     100

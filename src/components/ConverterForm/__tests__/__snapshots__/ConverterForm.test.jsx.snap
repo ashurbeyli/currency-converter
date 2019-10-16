@@ -79,6 +79,7 @@ exports[`<ConverterForm/> snapshot should match 1`] = `
       <PocketInfo
         balance={231}
         currency="EUR"
+        value=""
       />
     </Col>
   </FormRow>

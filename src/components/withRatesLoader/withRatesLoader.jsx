@@ -4,7 +4,7 @@ import { Alert } from 'react-bootstrap';
 import fetchRates from '../../utils/api/fetchRates';
 import { FETCH_RATES_DELAY } from '../../utils/constants/apiConstants';
 
-const withRatesLoader = WrapperComponent => () => {
+const withRatesLoader = WrappedComponent => () => {
   const [rates, setRates] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
@@ -29,7 +29,7 @@ const withRatesLoader = WrapperComponent => () => {
 
   if (isLoading) return <div>loading...</div>;
   return rates && !error ? (
-    <WrapperComponent rates={rates} />
+    <WrappedComponent rates={rates} />
   ) : (
     <Alert variant="danger">
       <Alert.Heading>Oh snap! You got an error!</Alert.Heading>

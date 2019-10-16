@@ -1,5 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { convertAmount } from '../../../utils/pocketsUtils';
+
+const propTypes = {
+  from: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+  rates: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 const ExchangeRate = ({ from, to, rates }) => (
   <span>
@@ -7,5 +14,9 @@ const ExchangeRate = ({ from, to, rates }) => (
     {to}
   </span>
 );
+
+
+ExchangeRate.propTypes = propTypes;
+ExchangeRate.DisplayName = 'ExchangeRate';
 
 export default ExchangeRate;

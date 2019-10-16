@@ -3,6 +3,7 @@
 exports[`<ExchangeRate /> should onChangeInput be called 1`] = `
 <FormRow>
   <Col
+    className=""
     xs={3}
   >
     <FormGroup>
@@ -33,6 +34,7 @@ exports[`<ExchangeRate /> should onChangeInput be called 1`] = `
           }
         }
         placeholder="From"
+        value=""
       />
     </InputGroup>
   </Col>
@@ -42,6 +44,7 @@ exports[`<ExchangeRate /> should onChangeInput be called 1`] = `
 exports[`<ExchangeRate /> snapshot should match 1`] = `
 <FormRow>
   <Col
+    className=""
     xs={3}
   >
     <FormGroup>
